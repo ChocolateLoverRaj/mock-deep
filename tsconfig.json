@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "importHelpers": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strictBindCallApply": true,
+    "target": "ES2022"
+  }
+}
