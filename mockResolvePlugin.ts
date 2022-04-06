@@ -9,10 +9,9 @@ const mockResolvePlugin: ResolvePluginInstance = {
   apply: resolver => {
     resolver.hooks.resolve.tapPromise('Mock', async (request, resolveContext) => {
       const path = request.request ?? never()
-      if (isAbsolute(path)) return
+      if (isAbsolute(path)) return undefined
 
-      if (path.startsWith('.')) return
-      console.log(path)
+      if (path.startsWith('.')) return undefined
 
       const mockPath = join(rootDir, '__mocks__', path)
       const resolvedPath = await (async () => {
@@ -30,8 +29,9 @@ const mockResolvePlugin: ResolvePluginInstance = {
         return resolvedPath
       })()
       if (resolvedPath !== undefined) {
-        return await (promisify(resolver.doResolve) as (...params: any[]) => Promise<any>)(
-          resolver.ensureHook('resolve'),
+        return await (promisify(resolver.doResolve) as (...params: any[]) => Promise<any>).call(
+          resolver,
+          resolver.hooks.resolve,
           {
             ...request,
             request: mockPath
