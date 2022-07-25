@@ -1,13 +1,7 @@
 import promptColor from '../cli'
-import { start, get } from '../__mocks__/prompt'
+import { get } from '../__mocks__/prompt'
+import { equal } from 'node:assert/strict'
 
-afterEach(() => {
-  start.mockReset()
-  get.mockReset()
-})
-
-test('returns prompt answer', async () => {
-  get.mockImplementation(async () => ({ color: 'Purple' }))
-  await expect(promptColor()).resolves.toBe('Purple')
-  expect(get.mock.calls.length).toBe(1)
-})
+get.callsFake(async () => ({ color: 'Purple' }))
+equal(await promptColor(), 'Purple')
+equal(get.callCount, 1)

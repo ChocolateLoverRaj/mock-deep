@@ -1,6 +1,4 @@
-const prompt = {
-  start: jest.fn(),
-  get: jest.fn()
-}
+import { stub } from 'sinon'
 
-export = prompt
+export const start = stub()
+export const get = stub()

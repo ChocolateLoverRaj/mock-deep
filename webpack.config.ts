@@ -33,6 +33,9 @@ const config: Configuration = {
   devtool: 'source-map',
   externals: {
     fs: 'require("memfs")'
+  },
+  experiments: {
+    topLevelAwait: true
   }
 }
 

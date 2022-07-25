@@ -1,8 +1,12 @@
-import createFile from '../deepMock'
-import { readFileSync } from 'fs'
+// import createFile from '../deepMock'
+// import { readFileSync } from 'fs'
+// import { fake } from 'sinon'
+// import snapshot from '../snapshot'
 
-test('file contents as expected', async () => {
-  process.cwd = jest.fn(() => '/')
-  await createFile()
-  expect(readFileSync('/file.json', 'utf8')).toMatchSnapshot()
-})
+// process.cwd = fake.returns('/')
+
+// await createFile()
+
+throw new Error("Doesn't work yet")
+
+// snapshot(import.meta.url, readFileSync('/file.json', 'utf8'))
