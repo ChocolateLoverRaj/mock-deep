@@ -1,5 +1,6 @@
 {
-  "roots": [
-    "<rootDir>/dist"
-  ]
+  "testMatch": [
+    "<rootDir>/dist/**/__tests__/**/*.[jt]s?(x)"
+  ],
+  "snapshotResolver": "./snapshotResolver.js"
 }
