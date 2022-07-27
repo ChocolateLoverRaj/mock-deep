@@ -2,7 +2,9 @@ import { Configuration } from 'webpack'
 import glob from 'glob'
 import { promisify } from 'util'
 import { join, basename, extname, dirname } from 'path'
-import mockResolvePlugin from './mockResolvePlugin'
+import getResolveMockResolvePlugin from './mockDeep/getResolveMockResolvePlugin'
+import getMockDeepLoaderRule from './mockDeep/importMocks/getMockDeepLoaderRule'
+import getCommentToQueryRule from './mockDeep/commentToQuery/getCommentToQueryRule'
 
 const config: Configuration = {
   entry: async () => Object.fromEntries((await promisify(glob)('__tests__/*.@(ts|js)', {
@@ -18,22 +20,22 @@ const config: Configuration = {
     clean: true
   },
   resolve: {
-    extensions: ['.js', '.ts'],
-    plugins: [mockResolvePlugin]
+    extensions: ['.cjs', '.js', '.ts'],
+    plugins: [getResolveMockResolvePlugin(join(__dirname, 'lib'))]
   },
   module: {
-    rules: [{
-      test: /.ts/,
-      exclude: /node_modules/,
-      loader: 'ts-loader'
-    }]
+    rules: [
+      getCommentToQueryRule(),
+      getMockDeepLoaderRule(),
+      {
+        test: /\.ts/,
+        exclude: /node_modules/,
+        loader: 'ts-loader'
+      }]
   },
   target: 'node',
   mode: 'none',
   devtool: 'source-map',
-  externals: {
-    fs: 'require("memfs")'
-  },
   experiments: {
     topLevelAwait: true
   }

@@ -1,9 +1,9 @@
-// import createFile from '../fs'
-// import { readFileSync } from 'fs'
+/* mock deep */
+import createFile from '../fs'
+import { readFileSync } from '../__mocks__/fs.cjs'
+import { fake } from 'sinon'
+import { equal } from 'node:assert/strict'
 
-// test('file contents as expected', async () => {
-//   process.cwd = jest.fn(() => '/')
-//   createFile()
-//   expect(readFileSync('/file.txt', 'utf8')).toMatchSnapshot()
-// })
-throw new Error("Doesn't work yet")
+process.cwd = fake.returns('/')
+createFile()
+equal(readFileSync('/file.txt', 'utf8'), 'Hi')
