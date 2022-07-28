@@ -4,8 +4,7 @@
     "esModuleInterop": true,
     "strictNullChecks": true,
     "importHelpers": true,
-    "module": "ES2022",
-    "moduleResolution": "Node",
+    "module": "NodeNext",
     "strictBindCallApply": true,
     "target": "ES2022"
   },
@@ -13,5 +12,8 @@
     "compilerOptions": {
       "module": "CommonJS"
     }
-  }
+  },
+  "include": [
+    "./lib"
+  ]
 }

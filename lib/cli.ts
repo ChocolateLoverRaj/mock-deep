@@ -1,8 +1,8 @@
-import { start, get } from 'prompt'
+import prompt from 'prompt'
 
 const promptColor = async (): Promise<string> => {
-  start()
-  const { color } = await get(['color'])
+  prompt.start()
+  const { color } = await prompt.get(['color'])
   return color as string
 }
 
